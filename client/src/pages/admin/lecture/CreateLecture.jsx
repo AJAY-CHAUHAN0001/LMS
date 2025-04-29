@@ -46,8 +46,6 @@ export const CreateLecture = () => {
     }
   }, [data, isSuccess, isError]);
 
-  //   const isLoading = false;
-
   return (
     <div className="flex-1 mx-10 ">
       <div className="mb-4">
