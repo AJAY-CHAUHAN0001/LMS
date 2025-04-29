@@ -37,6 +37,6 @@ app.get("*", (_, res) => {
 
 
 app.listen(PORT, () => {
-    console.log(`Server listen at PORT https://lms-xwnv.onrender.com:${PORT}`);
+    console.log(`Server listen at PORT http://localhost:${PORT}`);
     connectDB();
 })
