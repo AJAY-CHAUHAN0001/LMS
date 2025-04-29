@@ -31,9 +31,10 @@ app.use("/api/v1/purchase", purchaseRoute);
 app.use("/api/v1/progress", courseProgressRoute);
 
 app.use(express.static(path.join(DIRNAME, "/client/dist")));
-app.use("/*", (_, res) => {
+app.get("*", (_, res) => {
     res.sendFile(path.resolve(DIRNAME, "client", "dist", "index.html"));
 });
+
 
 app.listen(PORT, () => {
     console.log(`Server listen at PORT http://localhost:${PORT}`);
