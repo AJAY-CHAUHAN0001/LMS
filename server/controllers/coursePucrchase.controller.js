@@ -1,5 +1,3 @@
-// whsec_eccd7a5727e0b402c2b9ce9558903f43b0683c009e59a187a6ade5f411e7ce21
-
 import Stripe from "stripe";
 import { Course } from "../models/course.model.js";
 import { CoursePurchase } from "../models/coursePurchase.model.js";
@@ -85,11 +83,17 @@ export const createCheckoutSession = async (req, res) => {
 
 export const stripeWebhook = async (req, res) => {
    const sig = req.headers['stripe-signature'];
-   const secret = process.env.WEBHOOK_ENDPOINT_SECRET;
    let event;
-
   try {
-  event = stripe.webhooks.constructEvent(req.body, sig, secret);
+  const payloadString = JSON.stringify(req.body, null, 2);
+    const secret = process.env.WEBHOOK_ENDPOINT_SECRET;
+
+    const header = stripe.webhooks.generateTestHeaderString({
+      payload: payloadString,
+      secret,
+    });
+
+    event = stripe.webhooks.constructEvent(payloadString, header, secret);
   } catch (error) {
     console.error("Webhook error:", error.message);
     return res.status(400).send(`Webhook error: ${error.message}`);
