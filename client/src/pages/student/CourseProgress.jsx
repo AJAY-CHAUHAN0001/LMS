@@ -17,7 +17,7 @@ export const CourseProgress = () => {
   const params = useParams();
   const courseId = params.courseId;
 
-  const { data, isLoading, isError, refetch, error } =
+  const { data, isLoading, isError, refetch} =
     useGetCourseProgressQuery(courseId);
 
   const [updateLectureProgress] = useUpdateLectureProgressMutation();
