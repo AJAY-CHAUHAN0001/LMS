@@ -100,7 +100,7 @@ export const stripeWebhook = async (req, res) => {
   }
 
   // Handle the checkout session completed event
-  if (event.type === "checkout.session.completed") {
+  if (event?.type === "checkout.session.completed") {
     try {
       const session = event.data.object;
 
@@ -118,7 +118,7 @@ export const stripeWebhook = async (req, res) => {
       purchase.status = "completed";
 
       // Make all lectures visible by setting `isPreviewFree` to true
-      if (purchase.courseId && purchase.courseId.lectures.length > 0) {
+      if (purchase?.courseId && purchase?.courseId?.lectures?.length > 0) {
         await Lecture.updateMany(
           { _id: { $in: purchase.courseId.lectures } },
           { $set: { isPreviewFree: true } }
