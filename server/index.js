@@ -17,7 +17,18 @@ const PORT = process.env.PORT || 5000;
 
 const DIRNAME = path.resolve();
 
-app.use(express.json());
+// app.use(express.json());
+
+
+// Stripe webhook needs raw body, handle before express.json()
+app.use((req, res, next) => {
+    if (req.originalUrl === "/api/v1/purchase/webhook") {
+      express.raw({ type: "application/json" })(req, res, next); // for Stripe
+    } else {
+      express.json()(req, res, next); // normal JSON parsing
+    }
+  });
+
 app.use(cookieParser());
 app.use(cors({
     origin: "https://lms-xwnv.onrender.com",
