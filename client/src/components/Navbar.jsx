@@ -55,7 +55,7 @@ export const Navbar = () => {
         <div className="flex items-center gap-2 ml-10">
           <School size={"30"} />
           <h1
-            className="hidden md:block font-extrabold text-2xl md:cursor-pointer pointer-events-none"
+            className="hidden md:block font-extrabold text-2xl md:cursor-pointer"
             onClick={() => navigate("/")}
           >
             E-Learning
