@@ -30,7 +30,7 @@ export const createCheckoutSession = async (req, res) => {
     // create a stripe checkout session
 
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
+      payment_method_types: ["card","upi","google_pay"],
       line_items: [
         {
           price_data: {
@@ -85,6 +85,8 @@ export const stripeWebhook = async (req, res) => {
    const sig = req.headers['stripe-signature'];
    let event;
   try {
+  // for local environment =>
+    
   // const payloadString = JSON.stringify(req.body, null, 2);
   //   const secret = process.env.WEBHOOK_ENDPOINT_SECRET;
 
