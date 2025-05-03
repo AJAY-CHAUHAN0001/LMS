@@ -17,13 +17,13 @@ export const MyLearning = () => {
       <div className="my-10">
         {isLoading ? (
           <MyLearningSkeleton myLearning={myLearning} />
-        ) : myLearning.length === 0 ? (
+        ) : myLearning?.length === 0 ? (
           <p className="text-lg font-bold text-gray-400 dark:text-gray-100">
             You're not enrolled in any courses.
           </p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {myLearning.map((course, index) => (
+            {myLearning?.map((course, index) => (
               <Course key={index} course={course} />
             ))}
           </div>

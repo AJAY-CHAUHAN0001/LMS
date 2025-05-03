@@ -22,7 +22,7 @@ export const CourseDetail = () => {
 
   const navigate = useNavigate();
 
-  const { data, isLoading, isError, isSuccess, error, refetch } =
+  const { data, isLoading, isError, refetch } =
     useGetCourseWithStatusQuery(courseId);
     
   const { course, purchased } = data || {};
@@ -54,7 +54,7 @@ export const CourseDetail = () => {
           <h1 className="font-bold text-2xl md:text-3xl">
             {course?.courseTitle}
           </h1>
-          <p className="text-base md:text-lg">{course.subTitle}</p>
+          <p className="text-base md:text-lg">{course?.subTitle}</p>
           <p>
             Created By{""}{" "}
             <span className="text-[#C0C4FC] underline italic">
@@ -65,7 +65,7 @@ export const CourseDetail = () => {
             <BadgeInfo size={16} />
             <p>Last Updated {course?.createdAt.split("T")[0]} </p>
           </div>
-          <p>Students enrolled: {course?.enrolledStudents.length}</p>
+          <p>Students enrolled: {course?.enrolledStudents?.length}</p>
         </div>
       </div>
       <div className="max-w-7xl mx-auto my-5 px-4 md:px-8 flex flex-col lg:flex-row justify-between gap-10">
@@ -73,24 +73,24 @@ export const CourseDetail = () => {
           <h1 className="font-bold text-xl md:text-2xl">Description</h1>
           <p
             className="text-sm dark:text-gray-50"
-            dangerouslySetInnerHTML={{ __html: course.description }}
+            dangerouslySetInnerHTML={{ __html: course?.description }}
           />
 
           <Card>
             <CardHeader>
               <CardTitle>Course Content</CardTitle>
               <CardDescription>
-                {course.lectures.length} lectures
+                {course?.lectures?.length} lectures
               </CardDescription>
             </CardHeader>
             <CardContent className={"space-y-3"}>
-              {course.lectures.map((lecture) => (
+              {course?.lectures?.map((lecture) => (
                 <div
                   key={lecture?._id}
                   className="flex items-center gap-3 text-sm"
                 >
                   <span>
-                    {lecture.isPreviewFree && purchased ? (
+                    {lecture?.isPreviewFree && purchased ? (
                      <PlayCircle size={14} />
                     ) : (
                       <Lock size={14} />
@@ -116,7 +116,7 @@ export const CourseDetail = () => {
               <h1>{course?.lectures[0]?.lectureTitle}</h1>
               <Separator className="my-2" />
               <h1 className="text-lg md:text-xl font-semibold">
-                ₹{course.coursePrice}
+                ₹{course?.coursePrice}
               </h1>
             </CardContent>
             <CardFooter className="flex justify-center ">
