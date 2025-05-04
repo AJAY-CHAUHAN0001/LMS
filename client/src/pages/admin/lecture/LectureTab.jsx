@@ -203,14 +203,14 @@ export const LectureTab = () => {
         )}
         <div className="mt-4">
           <Button
-            disabled={isLoading}
+            disabled={isLoading || mediaProgress}
             className={"cursor-pointer"}
             onClick={editLectureHandler}
           >
-            {isLoading ? (
+            {isLoading || mediaProgress ? (
               <>
                 <Loader2 className="h-4 w-4 animate-spin" />
-                Please wait..
+                {isLoading ? "Please wait.." : "Uploading Video.."}
               </>
             ) : (
               "Update Lecture"
